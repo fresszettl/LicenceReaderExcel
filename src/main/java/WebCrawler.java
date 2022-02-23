@@ -31,7 +31,7 @@ public class WebCrawler {
                         safeUsed = Integer.toString(intUsed);
                         licenceMap.put("Modeling", safeUsed);
                     }
-                } else if(row.select("td:nth-of-type(1)").text().equals("ModelManager")){
+                } else if(row.select("td:nth-of-type(1)").text().equals("Model Manager")){
 
                     if(row.select("td:nth-of-type(1)").text().equals("")){
                         continue;

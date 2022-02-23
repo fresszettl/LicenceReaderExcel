@@ -10,10 +10,10 @@ import java.util.HashMap;
 
 public class CompareWorkload {
 
-    public static double getCurrentWorkload(String license) throws IOException {
-        HashMap<String, String> licenseMap = WebCrawler.readWeb();
+    public static double getCurrentWorkload(String licence) throws IOException {
+        HashMap<String, String> licenceMap = WebCrawler.readWeb();
 
-        String value = licenseMap.get(license);
+        String value = licenceMap.get(licence);
         double valueDouble = Double.parseDouble(value);
         return valueDouble;
     }
@@ -29,8 +29,8 @@ public class CompareWorkload {
         return lastHighestModelingDouble;
     }
 
-    public static boolean compareWorkloades(String license, int cellNum) throws IOException {
-        double compareV1 = getCurrentWorkload(license);
+    public static boolean compareWorkloades(String licence, int cellNum) throws IOException {
+        double compareV1 = getCurrentWorkload(licence);
         double compareV2 = getLastHighestWorkload(cellNum);
         if(compareV1 > compareV2) {
             return true;
