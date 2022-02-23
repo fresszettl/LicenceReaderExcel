@@ -21,6 +21,12 @@ public class WebCrawler {
 
             if(button.isEmpty()){
 
+                /*
+                if(row.getElementsContainingText("#23").hasText()){
+                    System.out.println("Wrong Site!! Please change to ignore Revision!");
+                }
+                 */
+
                 if(row.select("td:nth-of-type(1)").text().equals("Modeling")){
 
                     if(row.select("td:nth-of-type(1)").text().equals("")){
