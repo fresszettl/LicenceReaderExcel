@@ -12,27 +12,29 @@ public class WebCrawler {
         String url = "http://hhcadls:17171/s.html";
 
         Document document = Jsoup.connect(url).get();
-        Elements button = document.getElementsByAttributeValueContaining("name", "show_upgrades");
+        Elements licenseType = document.select("tr");
+        String lType = licenseType.text();
+        //System.out.println(lType);
+
         int counter = 0;
+        int intUsedModeling;
+        int modelingInt1 = 0;
+        int modelingInt2 = 0;
+        int modelingInt3 = 0;
 
         HashMap<String, String> licenceMap = new HashMap<String, String>();
 
         for(Element row : document.select("table tr")){
 
-            if(button.isEmpty()){
-
-                /*
-                if(row.getElementsContainingText("#23").hasText()){
-                    System.out.println("Wrong Site!! Please change to ignore Revision!");
-                }
-                 */
+            if(lType.contains("#23")){
+                //System.out.println("License Type #23");
 
                 if(row.select("td:nth-of-type(1)").text().equals("Modeling")){
 
                     if(row.select("td:nth-of-type(1)").text().equals("")){
                         continue;
                     } else {
-                        String safeUsed = output("3", row, "Currently used");
+                        String safeUsed = output("3", row);
                         int intUsed = Integer.parseInt(safeUsed) / 2;
                         safeUsed = Integer.toString(intUsed);
                         licenceMap.put("Modeling", safeUsed);
@@ -42,32 +44,42 @@ public class WebCrawler {
                     if(row.select("td:nth-of-type(1)").text().equals("")){
                         continue;
                     } else {
-                        String safeUsed = output("3", row, "Currently used");
+                        String safeUsed = output("3", row);
                         int intUsed = Integer.parseInt(safeUsed) / 2;
                         safeUsed = Integer.toString(intUsed);
                         licenceMap.put("Model Manager", safeUsed);
                     }
                 }
             } else {
+                String safeUsedModeling;
+                int safeUsedInt;
 
                 if(row.select("td:nth-of-type(1)").text().equals("Modeling")){
+
                     if(row.select("td:nth-of-type(1)").text().equals("")) {
                         continue;
                     } else {
 
-                        String line = row.select("td:nth-of-type(4)").text();
-                        counter = counter + Integer.parseInt(line);
-                        counter = counter / 2;
-                        String safeUsed = String.valueOf(counter);
-                        licenceMap.put("Modeling", safeUsed);
+                        safeUsedModeling = output("4", row);
+                        safeUsedInt = Integer.parseInt(safeUsedModeling) / 2;
 
+                        if(counter == 0){
+                            modelingInt1 = safeUsedInt;
+                        } else if(counter == 1){
+                            modelingInt2 = safeUsedInt;
+                        } else if(counter == 2){
+                            modelingInt3 = safeUsedInt;
+                        }
+
+                        counter ++;
                     }
+
                 } else if(row.select("td:nth-of-type(1)").text().equals("Model Manager")){
 
                     if(row.select("td:nth-of-type(1)").text().equals("")){
                         continue;
                     } else {
-                        String safeUsed = output("4", row, "Currently used");
+                        String safeUsed = output("4", row);
                         int intUsed = Integer.parseInt(safeUsed) / 2;
                         safeUsed = Integer.toString(intUsed);
                         licenceMap.put("Model Manager", safeUsed);
@@ -75,10 +87,13 @@ public class WebCrawler {
                 }
             }
         }
+        intUsedModeling = modelingInt1 + modelingInt2 + modelingInt3;
+        String finalUsedModeling = Integer.toString(intUsedModeling);
+        licenceMap.put("Modeling", finalUsedModeling);
         return licenceMap;
     }
 
-    private static String output(String columnNumber, Element row, String rowText) {
+    private static String output(String columnNumber, Element row) {
         final String line = row.select("td:nth-of-type("+columnNumber+")").text();
         String out = line;
         return out;
