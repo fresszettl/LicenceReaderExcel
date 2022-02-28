@@ -23,7 +23,7 @@ public class DaySheet {
     }
 
     public void writeDaySheet(HashMap<String, String> webCrawler) throws IOException {
-        String excelFilePath = "C:\\Users\\BecFab01\\Desktop\\statistik.xls";
+        String excelFilePath = "\\\\hhinstall2\\EDV\\IT-Hardware\\CAD\\MEls\\statistik.xls";
         FileInputStream fileIS = new FileInputStream(excelFilePath);
         Workbook workbook = WorkbookFactory.create(fileIS);
 
