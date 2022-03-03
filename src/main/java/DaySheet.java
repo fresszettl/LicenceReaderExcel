@@ -23,8 +23,8 @@ public class DaySheet {
     }
 
     public void writeDaySheet(HashMap<String, String> webCrawler) throws IOException {
-        String excelFilePath = "\\\\hhinstall2\\EDV\\IT-Hardware\\CAD\\MEls\\statistik.xls";
-        FileInputStream fileIS = new FileInputStream(excelFilePath);
+        //String excelFilePath = "\\\\hhinstall2\\EDV\\IT-Hardware\\CAD\\MEls\\statistik.xls";
+        FileInputStream fileIS = new FileInputStream(ExcelUpdater.excelFilePath);
         Workbook workbook = WorkbookFactory.create(fileIS);
 
         if(!hasWorkbookSheetWithName(workbook)) {
@@ -42,7 +42,7 @@ public class DaySheet {
 
         fileIS.close();
 
-        FileOutputStream fileOS = new FileOutputStream(excelFilePath);
+        FileOutputStream fileOS = new FileOutputStream(ExcelUpdater.excelFilePath);
         workbook.write(fileOS);
         fileOS.close();
         System.out.println("Day Sheet updated successfully!");

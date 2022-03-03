@@ -4,7 +4,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -13,9 +12,11 @@ import java.util.HashMap;
 
 public class ExcelUpdater {
 
+    public static String excelFilePath = "\\\\hhinstall2\\EDV\\IT-Hardware\\CAD\\MEls\\statistik.xls";
+
     public void updateExcelFile(HashMap<String, String> webCrawler) throws IOException {
 
-        String excelFilePath = "\\\\hhinstall2\\EDV\\IT-Hardware\\CAD\\MEls\\statistik.xls";
+
         //String excelFilePath = "C:\\Users\\BecFab01\\Desktop\\statistik.xls";
 
         FileInputStream fileIS = new FileInputStream(excelFilePath);
